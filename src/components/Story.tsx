@@ -10,7 +10,6 @@ const Story = (props: StoryProps) => {
 
   useEffect(()=>{
     if(props.isCurrentStory && !shouldRenderStory) {
-      console.log('setShouldRenderStory(true)');
       setShouldRenderStory(true)
     }
   },[props.isCurrentStory, shouldRenderStory]);
