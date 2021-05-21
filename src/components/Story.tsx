@@ -1,11 +1,23 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { StoryProps, GlobalCtx } from "./../interfaces";
 import GlobalContext from "./../context/Global";
 
 const Story = (props: StoryProps) => {
   const globalContext = useContext<GlobalCtx>(GlobalContext);
+  const [shouldRenderStory, setShouldRenderStory] = useState(false)
 
   const { width, height, loader, header, storyStyles } = globalContext;
+
+  useEffect(()=>{
+    if(props.isCurrentStory && !shouldRenderStory) {
+      console.log('setShouldRenderStory(true)');
+      setShouldRenderStory(true)
+    }
+  },[props.isCurrentStory, shouldRenderStory]);
+
+  if(!shouldRenderStory) {
+    return null;
+  }
 
   const rendererMessageHandler = (type: string, data: any) => {
     switch (type) {
